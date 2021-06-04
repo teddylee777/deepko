@@ -1,0 +1,17 @@
+version: '2'
+services:
+  kaggle:
+    # 로컬 빌드시
+    image: kaggle/python-gpu-build:latest
+    # 원격 이미지 로드시
+    # image: gcr.io/kaggle-gpu-images/python:latest
+    volumes:
+        # local 폴더:도커폴더 를 입력합니다.(예시: /data/jupyter:/home/jupyter)
+        # 도커 생성시 /home/jupyter가 생성되어 있으므로 그냥 놔두어도 OK
+      - /data/jupyter:/home/jupyter
+    restart: always
+    ports:
+        # Jupyter notebook port 번호 지정, ssh 포트 필요시 지정
+        # local 포트:도커 포트
+      - "8888:8888"
+      - "22:22" # ssh
