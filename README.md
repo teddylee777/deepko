@@ -14,7 +14,50 @@
 
 
 
+## 추가 설치된 항목과 Python 패키지
 
+- apt 패키지 인스톨러 **카카오 mirror 서버** 추가
+- 나눔고딕 폰트 설치
+- matplotlib 에 나눔고딕 폰트 추가
+- mecab 형태소 분석기 설치 및 파이썬 패키지 설치
+- [konlpy](https://konlpy-ko.readthedocs.io/ko/v0.4.3/): 한국어 정보처리를 위한 파이썬 패키지
+- [py-hanspell](https://github.com/ssut/py-hanspell): 네이버 맞춤법 검사기를 이용한 파이썬용 한글 맞춤법 검사 라이브러리
+- [soynlp](https://github.com/lovit/soynlp): 한국어 자연어처리를 위한 파이썬 라이브러리
+- [soyspacing](https://github.com/lovit/soyspacing): 띄어쓰기 오류 교정 라이브러리
+- [KR-WordRank](https://github.com/lovit/KR-WordRank)비지도학습 방법으로 한국어 텍스트에서 단어/키워드를 자동으로 추출하는 라이브러리
+- `jupyter_notebook_config.py` : Jupyter Notebook 설정 파일 추가
+
+
+
+## 빠른 설치 및 실행
+
+
+
+
+
+## 빌드
+
+DockerHub에서 다운로드 받은 도커 이미지로 실행시 빌드 과정은 생략 가능합니다.
+
+### DockerHub 다운로드
+
+DockerHub에 미리 만들어 놓은 이미지를 다운로드 받습니다.
+
+스트레스가 없다는 것이 장점입니다. 다운로드 시간은 오래 걸립니다.
+
+
+
+### Dockerfile 로 빌드
+
+커스텀이 가능합니다. 필요한 추가 패키지가 있다면 추가 구성이 가능합니다.
+
+추가 패키지 설치를 위해서는 Dockerfile을 수정하시면 됩니다.
+
+```bash
+git clone https://github.com/teddylee777/docker-kaggle-ko.git
+cd docker-kaggle-ko
+docker build -t teddylee777/docker-kaggle-ko:latest .
+```
 
 
 
@@ -48,5 +91,4 @@ kjupyter{
 ```bash
 kjupyter
 ```
-
 

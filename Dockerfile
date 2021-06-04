@@ -22,7 +22,10 @@ RUN apt-get install fonts-nanum* && \
 # konlpy, py-hanspell, soynlp 패키지 설치 
 RUN pip install konlpy && \
     pip install git+https://github.com/ssut/py-hanspell.git && \
-    pip install soynlp
+    pip install soynlp && \
+    pip install soyspacing && \
+    pip install krwordrank && \
+    pip install soykeyword
 
 # 형태소 분석기 mecab 설치
 RUN cd /tmp && \
@@ -50,6 +53,8 @@ RUN cd /tmp && \
 RUN cd /tmp && \
     git clone https://bitbucket.org/eunjeon/mecab-python-0.996.git && \
     cd mecab-python-0.996 && \
+    python setup.py build && \
+    python setup.py install
 
 # locale 설정
 RUN apt-get update && apt-get install -y vim locales tzdata && \
