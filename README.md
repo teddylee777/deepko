@@ -20,8 +20,8 @@
 ## 추가 설치된 항목과 Python 패키지
 
 - apt 패키지 인스톨러 **카카오 mirror 서버** 추가
-- 나눔고딕 폰트 설치
-- matplotlib 에 나눔고딕 폰트 추가
+- 나눔폰트, D2Coding 폰트 설치
+- matplotlib 에 나눔폰트, D2Coding 폰트 추가
 - mecab 형태소 분석기 설치 및 파이썬 패키지 설치
 - [konlpy](https://konlpy-ko.readthedocs.io/ko/v0.4.3/): 한국어 정보처리를 위한 파이썬 패키지
 - [py-hanspell](https://github.com/ssut/py-hanspell): 네이버 맞춤법 검사기를 이용한 파이썬용 한글 맞춤법 검사 라이브러리
