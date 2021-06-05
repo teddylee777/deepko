@@ -14,6 +14,8 @@ RUN apt-get install fonts-nanum* && \
     cd ~/.local/share/fonts && \
     wget https://github.com/naver/d2codingfont/releases/download/VER1.3.2/D2Coding-Ver1.3.2-20180524.zip && \
     unzip D2Coding-Ver1.3.2-20180524.zip && \
+    mkdir /usr/share/fonts/truetype/D2Coding && \
+    cp ./D2Coding/*.ttf /usr/share/fonts/truetype/D2Coding/ && \
     cp /usr/share/fonts/truetype/nanum/Nanum* /opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/ && \
     fc-cache -fv && \
     rm -rf D2Coding* && \
