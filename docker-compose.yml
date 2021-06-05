@@ -2,7 +2,7 @@ version: '2'
 services:
   kaggle:
     # 로컬 빌드시
-    image: kaggle/python-gpu-build:latest
+    image: teddylee777/docker-kaggle-ko:latest
     # 원격 이미지 로드시
     # image: gcr.io/kaggle-gpu-images/python:latest
     volumes:
