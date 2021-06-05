@@ -3,6 +3,9 @@
 
 **docker-kaggle-ko**를 만들게 된 계기는 안정적으로 업데이트 되고 있는 **캐글 GPU 도커**에 기반하여 **한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가**하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
 
+- 도커 **Hub** 주소**: [teddylee777/docker-kaggle-ko](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko)
+- **GitHub** 주소: [teddylee777/docker-kaggle-ko](https://github.com/teddylee777/docker-kaggle-ko)
+
 
 
 ## 도커 환경
