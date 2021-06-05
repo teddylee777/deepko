@@ -1,7 +1,7 @@
 # local 빌드시
-FROM kaggle/python-gpu-build:latest
+# FROM kaggle/python-gpu-build:latest
 # GCP 이미지 다운로드시
-# FROM gcr.io/kaggle-gpu-images/python:latest
+FROM gcr.io/kaggle-gpu-images/python:latest
 
 # 카카오 ubuntu archive mirror server 추가. 다운로드 속도 향상
 RUN sed -i 's@archive.ubuntu.com@mirror.kakao.com@g' /etc/apt/sources.list && \
