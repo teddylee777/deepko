@@ -71,7 +71,7 @@ RUN jupyter notebook --generate-config
 COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
 # 설치 완료 후 테스트용 ipynb
-COPY test.ipynb /root/.jupyter/test.ipynb
+COPY test.ipynb /home/jupyter/test.ipynb
 
 # 기본
 EXPOSE 8888
