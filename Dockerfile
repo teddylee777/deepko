@@ -70,6 +70,9 @@ RUN jupyter notebook --generate-config
 # config 파일 복사 (jupyter_notebook_config.py 파일 참고)
 COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
+# 설치 완료 후 테스트용 ipynb
+COPY test.ipynb /root/.jupyter/test.ipynb
+
 # 기본
 EXPOSE 8888
 # jupyter notebook 의 password를 지정하지 않으면 보안상 취약하므로 지정하는 것을 권장

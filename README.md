@@ -32,6 +32,60 @@
 
 
 
+## 설치된 주요 라이브러리
+
+```
+catboost                       0.25.1
+cudf                           0.16.0
+fastai                         2.2.7
+fasttext                       0.9.2
+fbprophet                      0.7.1
+gensim                         4.0.1
+huggingface-hub                0.0.9
+hyperopt                       0.2.5
+kaggle                         1.5.12
+Keras                          2.4.3
+Keras-Preprocessing            1.1.2
+konlpy                         0.5.2
+krwordrank                     1.0.3
+lightgbm                       3.2.0
+matplotlib                     3.4.2
+mecab-python                   0.996-ko-0.9.2
+missingno                      0.4.2
+mlxtend                        0.18.0
+nltk                           3.2.4
+numpy                          1.19.5
+opencv-python                  4.5.2.52
+pandas                         1.1.5
+plotly                         4.14.3
+plotly-express                 0.4.1
+py-hanspell                    1.1
+scikit-image                   0.18.1
+scikit-learn                   0.24.2
+scikit-surprise                1.1.1
+scipy                          1.6.2
+seaborn                        0.11.1
+sentencepiece                  0.1.95
+soynlp                         0.0.493
+soyspacing                     1.0.17
+spacy                          2.3.5
+SQLAlchemy                     1.4.3
+statsmodels                    0.12.2
+tensorboard                    2.4.1
+tensorflow                     2.4.1
+tensorflow-datasets            3.0.0
+Theano                         1.0.5
+torch                          1.7.0
+torchaudio                     0.7.0a0+ac17b64
+torchmetrics                   0.3.2
+torchtext                      0.8.0a0+cd6902d
+torchvision                    0.8.1
+wordcloud                      1.8.1
+xgboost                        1.4.2
+```
+
+
+
 ## 빠른 설치 및 실행
 
 ### STEP 1: Docker가 사전에 설치되어 있어야 합니다.
@@ -172,5 +226,82 @@ kjupyter{
 
 ```bash
 kjupyter
+```
+
+
+
+## 설치 완료 후 테스트
+
+`test.ipynb` 파일을 실행하여 잘 설치가 되었는지 확인할 수 있습니다.
+
+
+
+> NVIDIA
+
+```bash
+!nvidia-smi
+```
+
+> TensorFlow
+
+```python
+import tensorflow as tf
+
+print(f'tf.__version__: {tf.__version__}')
+
+gpus = tf.config.experimental.list_physical_devices('GPU')
+print(gpus)
+```
+
+> PyTorch
+
+```python
+import torch
+
+print(f'torch.__version__: {torch.__version__}')
+
+print(f'GPU 사용여부: {torch.cuda.is_available()}')
+gpu_count = torch.cuda.device_count()
+print(f'GPU count: {gpu_count}')
+if gpu_count > 0:
+    print(f'GPU name: {torch.cuda.get_device_name(0)}')
+```
+
+> 한글 자연어처리 패키지
+
+```python
+from konlpy.tag import Okt, Kkma, Hannanum
+
+sample_sentence = '아버지가방에들어가신다.'
+
+okt = Okt()
+print(f'okt: {okt.pos(sample_sentence)}')
+
+kkma = Kkma()
+print(f'kkma: {okt.pos(sample_sentence)}')
+
+hannanum = Hannanum()
+print(f'hannanum: {hannanum.pos(sample_sentence)}')
+```
+
+> Mecab 설치 확인
+
+```python
+from konlpy.tag import Mecab
+
+sample_sentence = '아버지가방에들어가신다.'
+
+mecab = Mecab()
+print(f'mecab: {mecab.pos(sample_sentence)}')
+```
+
+> 머신러닝 패키지
+
+```python
+import sklearn
+import lightgbm
+import xgboost
+
+print(f'lightgbm: {lightgbm.__version__}\nxgboost: {xgboost.__version__}\nsklearn: {sklearn.__version__}')
 ```
 
