@@ -161,7 +161,7 @@ docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:l
 
 
 
-## 빌드
+## 빌드 (위의 빠른 실행으로 실행시 SKIP 가능)
 
 DockerHub에서 다운로드 받은 도커 이미지로 실행시 **빌드 과정은 생략** 가능합니다.
 
