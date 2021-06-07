@@ -6,6 +6,7 @@
 - 도커 **Hub** 주소: [teddylee777/docker-kaggle-ko](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko)
 - **GitHub** 주소: [teddylee777/docker-kaggle-ko](https://github.com/teddylee777/docker-kaggle-ko)
 
+**추가 패키지 요청은 issue 를 통해 요청해 주세요! 검토 후 반영 혹은 미반영시 사유를 남기도록 하겠습니다.**
 
 
 ## 도커 환경
