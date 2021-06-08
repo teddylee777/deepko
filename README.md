@@ -238,17 +238,30 @@ docker build -f cpu.Dockerfile -t teddylee777/docker-kaggle-ko-cpu:latest .
 - `-v`: local 볼륨 마운트. **local 볼륨:도커 볼륨**
 - `--name`: 도커의 별칭(name) 설정
 
+**GPU**
 ```bash
 docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko
+```
+
+**CPU**
+```bash
+docker run --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko-cpu
 ```
 
 ## .bashrc에 단축 커멘드 지정
 
 `~/.bashrc`의 파일에 아래 커멘드를 추가하여 단축키로 Docker 실행
 
+**GPU**
 ```bash
 kjupyter{
     docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko
+}
+```
+**CPU**
+```bash
+kjupyter{
+    docker run --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko-cpu
 }
 ```
 
