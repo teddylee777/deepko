@@ -161,16 +161,26 @@ docker run --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777
 
 > 도커를 background에서 실행
 
+**GPU**
 ```bash
 docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/docker-kaggle-ko:latest
 ```
 
+**CPU**
+```bash
+docker run --rm -itd -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest
+```
+
 > bash shell 진입
 
+**GPU**
 ```bash
 docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest /bin/bash
 ```
-
+**CPU**
+```bash
+docker run --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest /bin/bash
+```
 
 
 ## 빌드 (위의 빠른 실행으로 실행시 SKIP 가능)
@@ -325,3 +335,36 @@ import xgboost
 print(f'lightgbm: {lightgbm.__version__}\nxgboost: {xgboost.__version__}\nsklearn: {sklearn.__version__}')
 ```
 
+> XGBoost (CPU & GPU 속도 비교)
+
+```python
+import time
+from sklearn.datasets import make_regression
+from xgboost import XGBRegressor
+
+def model_test(model_name, model):
+    x, y = make_regression(n_samples=100000, n_features=100)
+    
+    start_time = time.time()
+    model.fit(x, y)
+    end_time = time.time()
+    return f'{model_name}: 소요시간: {(end_time - start_time)} 초'
+
+xgb = XGBRegressor(n_estimators=1000, 
+                   learning_rate=0.01, 
+                   subsample=0.8, 
+                   colsample_bytree=0.8,
+                   objective='reg:squarederror', 
+                  )
+
+print(model_test('xgb (cpu)', xgb))
+
+xgb = XGBRegressor(n_estimators=1000, 
+                   learning_rate=0.01, 
+                   subsample=0.8, 
+                   colsample_bytree=0.8,
+                   objective='reg:squarederror', 
+                   tree_method='gpu_hist')
+
+print(model_test('xgb (gpu)', xgb))
+```
