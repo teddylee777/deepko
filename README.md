@@ -368,3 +368,7 @@ xgb = XGBRegressor(n_estimators=1000,
 
 print(model_test('xgb (gpu)', xgb))
 ```
+```
+xgb (cpu): 소요시간: 35.86732840538025 초
+xgb (gpu): 소요시간: 6.682094573974609 초
+```
