@@ -138,14 +138,25 @@ DockerHub에 미리 빌드된 이미지를 다운로드 받은 후 실행합니�
 
 > jupyter notebook 서버 실행, port는 8888번 포트 사용
 
+**GPU**
 ```bash
 docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest
 ```
 
+**CPU**
+```bash
+docker run --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest
+```
+
 > jupyter notebook 서버 실행, 로컬 volume 마운트
 
+**GPU**
 ```bash
 docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/docker-kaggle-ko:latest
+```
+**CPU**
+```bash
+docker run --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/docker-kaggle-ko-cpu:latest
 ```
 
 > 도커를 background에서 실행
@@ -172,10 +183,15 @@ DockerHub에 미리 만들어 놓은 이미지를 다운로드 받습니다.
 
 스트레스가 없다는 것이 장점입니다. 다운로드 시간은 오래 걸립니다.
 
+**GPU**
 ```bash
 docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest
 ```
 
+**CPU**
+```bash
+docker run --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest
+```
 
 
 ### Dockerfile을 수정하여 직접 빌드
@@ -190,12 +206,17 @@ docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:l
 - 도커명: docker-kaggle-ko
 - 태그: latest
 
+**GPU**
 ```bash
 git clone https://github.com/teddylee777/docker-kaggle-ko.git
 cd docker-kaggle-ko
 docker build -t teddylee777/docker-kaggle-ko:latest .
 ```
 
+**CPU**
+```bash
+docker build -f cpu.Dockerfile -t teddylee777/docker-kaggle-ko-cpu:latest .
+```
 
 
 ## 도커 실행
@@ -210,8 +231,6 @@ docker build -t teddylee777/docker-kaggle-ko:latest .
 ```bash
 docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko
 ```
-
-
 
 ## .bashrc에 단축 커멘드 지정
 
