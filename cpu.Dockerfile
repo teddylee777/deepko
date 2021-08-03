@@ -28,7 +28,8 @@ RUN pip install konlpy && \
     pip install soynlp && \
     pip install soyspacing && \
     pip install krwordrank && \
-    pip install soykeyword
+    pip install soykeyword && \
+    pip install git+https://github.com/haven-jeon/PyKoSpacing.git
 
 # 형태소 분석기 mecab 설치
 RUN cd /tmp && \
