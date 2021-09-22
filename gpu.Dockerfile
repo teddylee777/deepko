@@ -69,13 +69,15 @@ ENV CONDA_PREFIX /opt/conda/envs/py37
 # 패키지 설치
 RUN pip install setuptools && \
     pip install mkl && \
+    pip install pymysql && \
     pip install numpy && \
     pip install scipy && \
-    pip install pandas && \
+    pip install pandas==1.2.5 && \
     pip install jupyter notebook && \
     pip install matplotlib && \
     pip install seaborn && \
     pip install hyperopt && \
+    pip install optuna && \
     pip install missingno && \
     pip install mlxtend && \
     pip install catboost && \
@@ -89,7 +91,9 @@ RUN pip install setuptools && \
     pip install tensorflow-datasets && \
     pip install gensim && \
     pip install nltk && \
-    apt-get install -y graphviz && pip install graphviz
+    pip install wordcloud && \
+    apt-get install -y graphviz && pip install graphviz && \
+    pip install cupy-cuda112
 
 # Pytorch 설치
 RUN pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
@@ -106,7 +110,8 @@ RUN pip install pystan==2.19.1.1 && \
 RUN pip install "sentencepiece<0.1.90" wandb tensorboard albumentations pydicom opencv-python scikit-image pyarrow kornia \
     catalyst captum
 
-RUN pip install fastai
+RUN pip install fastai && \
+    conda install -c rapidsai -c nvidia -c numba -c conda-forge cudf=21.08 python=3.7 cudatoolkit=11.2
 
 # cmake 설치 (3.16)
 RUN wget https://cmake.org/files/v3.16/cmake-3.16.2.tar.gz && \
@@ -118,7 +123,7 @@ RUN wget https://cmake.org/files/v3.16/cmake-3.16.2.tar.gz && \
 
 ENV PATH=/usr/local/bin:${PATH}
 
-# 나눔고딕 폰트 설치, D2Coding 폰트 설치
+# 나눔고딕 폰트 설치
 # matplotlib에 Nanum 폰트 추가
 RUN apt-get install fonts-nanum* && \
     cp /usr/share/fonts/truetype/nanum/Nanum* /opt/conda/envs/py37/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/ && \
@@ -173,20 +178,14 @@ RUN apt-get install -y ocl-icd-libopencl1 clinfo libboost-all-dev && \
     mkdir -p /etc/OpenCL/vendors && \
     echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
-# lightgbm(GPU) 설치
+# lightgbm (GPU 설치)
 RUN pip uninstall -y lightgbm && \
-    cd /usr/local/src && \
-    git clone --recursive https://github.com/microsoft/LightGBM && \
-    cd LightGBM && \
-    git checkout tags/v3.2.1 && \
-    mkdir build && cd build && \
+    cd /usr/local/src && mkdir lightgbm && cd lightgbm && \
+    git clone --recursive --branch stable --depth 1 https://github.com/microsoft/LightGBM && \
+    cd LightGBM && mkdir build && cd build && \
     cmake -DUSE_GPU=1 -DOpenCL_LIBRARY=/usr/local/cuda/lib64/libOpenCL.so -DOpenCL_INCLUDE_DIR=/usr/local/cuda/include/ .. && \
-    make -j4 && \
-    cd /usr/local/src/LightGBM/python-package && \
-    python setup.py install --precompile && \
-    mkdir -p /etc/OpenCL/vendors && \
-    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
-
+    make -j$(nproc) OPENCL_HEADERS=/usr/local/cuda-11.2/targets/x86_64-linux/include LIBOPENCL=/usr/local/cuda-11.2/targets/x86_64-linux/lib && \
+    cd /usr/local/src/lightgbm/LightGBM/python-package && python setup.py install --precompile
 
 # Remove the CUDA stubs.
 ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH_NO_STUBS"
@@ -216,4 +215,7 @@ ENV LANG ko_KR.UTF-8
 EXPOSE 8888
 # jupyter notebook 의 password를 지정하지 않으면 보안상 취약하므로 지정하는 것을 권장
 # CMD jupyter notebook --allow-root
+
+
+
 
