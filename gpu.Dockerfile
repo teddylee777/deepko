@@ -1,5 +1,5 @@
 # local 빌드시
-FROM tensorflow/tensorflow:2.6.0-gpu-jupyter
+FROM tensorflow/tensorflow:2.9.1-gpu-jupyter
 FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu18.04 AS nvidia
 
 # CUDA
@@ -54,7 +54,7 @@ ENV PATH $CONDA_DIR/bin:$PATH
 
 # Install miniconda
 RUN echo "export PATH=$CONDA_DIR/bin:"'$PATH' > /etc/profile.d/conda.sh && \
-    curl -sL https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh -o ~/miniconda.sh && \
+    curl -sL https://repo.anaconda.com/miniconda/Miniconda3-py37_4.12.0-Linux-x86_64.sh -o ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p $CONDA_DIR && \
     rm ~/miniconda.sh
 
@@ -72,7 +72,7 @@ RUN pip install setuptools && \
     pip install pymysql && \
     pip install numpy && \
     pip install scipy && \
-    pip install pandas==1.2.5 && \
+    pip install pandas==1.3.5 && \
     pip install jupyter notebook && \
     pip install matplotlib && \
     pip install seaborn && \
@@ -87,7 +87,7 @@ RUN pip install setuptools && \
     pip install nbconvert && \
     pip install Pillow && \
     pip install tqdm && \
-    pip install tensorflow==2.6.0 && \
+    pip install tensorflow==2.9.1 && \
     pip install tensorflow-datasets && \
     pip install gensim && \
     pip install nltk && \
@@ -96,7 +96,7 @@ RUN pip install setuptools && \
     pip install cupy-cuda112
 
 # Pytorch 설치
-RUN pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html
 
 RUN pip install --upgrade cython && \
     pip install --upgrade cysignals && \
@@ -110,8 +110,8 @@ RUN pip install pystan==2.19.1.1 && \
 RUN pip install "sentencepiece<0.1.90" wandb tensorboard albumentations pydicom opencv-python scikit-image pyarrow kornia \
     catalyst captum
 
-RUN pip install fastai && \
-    conda install -c rapidsai -c nvidia -c numba -c conda-forge cudf=21.08 python=3.7 cudatoolkit=11.2
+RUN pip install fastai 
+# RUN conda install -c rapidsai -c nvidia -c numba -c conda-forge cudf=22.06 python=3.7 cudatoolkit=11.2
 
 # cmake 설치 (3.16)
 RUN wget https://cmake.org/files/v3.16/cmake-3.16.2.tar.gz && \
