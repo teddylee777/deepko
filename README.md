@@ -14,7 +14,7 @@
 
 - OS: Ubuntu18.04
 - GPU: RTX3090 x 2way
-- CUDA11
+- CUDA: 11.3
 - Python (anaconda): 3.7.10
 
 
