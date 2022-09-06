@@ -105,7 +105,8 @@ RUN pip install --upgrade cython && \
     pip install transformers
 
 RUN pip install pystan==2.19.1.1 && \
-    pip install prophet
+    pip install prophet && \
+    pip install torchsummary
 
 RUN pip install "sentencepiece<0.1.90" wandb tensorboard albumentations pydicom opencv-python scikit-image pyarrow kornia \
     catalyst captum
