@@ -1,7 +1,9 @@
 # docker-kaggle-ko
-캐글 노트북(Kaggle Notebook) 커널로도 유명한 도커인 [Kaggle/docker-python](https://github.com/Kaggle/docker-python)의 **GPU Docker**(gpu.Dockerfile)를 기반으로 구성하였습니다. Kaggle에서 공개한 도커 이미지는 한글 폰트, 자연어처리 패키지, 형태소 분석기 등이 누락되어 있습니다.
+TensorFlow 2.9.1 의 [tensorflow/tensorflow:2.9.1-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.9.1-gpu-jupyter/images/sha256-6345c1f2eaaf7b8efc9b8ec7f62869e6490db80e07ae5b856d5c16b48146daae?context=explore)의 도커를 베이스로 확장하여 **GPU Docker**(gpu.Dockerfile)를 구성하였습니다. 
 
-**docker-kaggle-ko**를 만들게 된 계기는 안정적으로 업데이트 되고 있는 **캐글 GPU 도커**에 기반하여 **한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가**하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
+TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
+
+**docker-kaggle-ko**를 만들게 된 계기는 안정적으로 업데이트 되고 있는 tensorflow/tensorflow-gpu-jupyter에 기반하여 한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가**하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
 
 - **GPU** 버전 도커 **Hub** 주소: [teddylee777/docker-kaggle-ko](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko)
 - **CPU** 버전 도커 **Hub** 주소: [teddylee777/docker-kaggle-ko-cpu](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko-cpu)
