@@ -213,7 +213,7 @@ docker run --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest
 ```bash
 git clone https://github.com/teddylee777/docker-kaggle-ko.git
 cd docker-kaggle-ko
-docker build -t teddylee777/docker-kaggle-ko:latest .
+docker build -f gpu.Dockerfile -t teddylee777/docker-kaggle-ko:latest .
 ```
 
 **CPU**
