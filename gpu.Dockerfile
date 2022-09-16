@@ -18,7 +18,7 @@ ENV NVIDIA_REQUIRE_CUDA="cuda>=$CUDA_MAJOR_VERSION.$CUDA_MINOR_VERSION"
 
 # 카카오 ubuntu archive mirror server 추가. 다운로드 속도 향상
 RUN sed -i 's@archive.ubuntu.com@mirror.kakao.com@g' /etc/apt/sources.list && \
-    apt-get update
+    apt-get update && apt-get install alien -y
 
 # openjdk java vm 설치
 RUN apt-get update && \
@@ -74,6 +74,8 @@ RUN pip install setuptools && \
     pip install scipy && \
     pip install pandas==1.3.5 && \
     pip install jupyter notebook && \
+    pip install jupyterlab && \
+    pip install jupyterthemes && \
     pip install matplotlib && \
     pip install seaborn && \
     pip install hyperopt && \
@@ -210,7 +212,7 @@ ENV LANG ko_KR.UTF-8
 # COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
 # 설치 완료 후 테스트용 ipynb
-# COPY test.ipynb /home/jupyter/test.ipynb
+COPY test.ipynb /home/jupyter/test.ipynb
 
 # 기본
 EXPOSE 8888
