@@ -1,5 +1,5 @@
 # docker-kaggle-ko
-TensorFlow 2.9.1 의 [tensorflow/tensorflow:2.9.1-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.9.1-gpu-jupyter/images/sha256-6345c1f2eaaf7b8efc9b8ec7f62869e6490db80e07ae5b856d5c16b48146daae?context=explore)의 도커를 베이스로 확장하여 **GPU Docker**(gpu.Dockerfile)를 구성하였습니다. 
+TensorFlow 2.9.1 의 [tensorflow/tensorflow:2.9.1-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.9.1-gpu-jupyter/images/sha256-6345c1f2eaaf7b8efc9b8ec7f62869e6490db80e07ae5b856d5c16b48146daae?context=explore)의 도커를 베이스로 확장하여 **GPU 전용 Docker파일(gpu.Dockerfile)**을 구성하였습니다. 
 
 TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
 
