@@ -1,10 +1,12 @@
 # Data Science Docker Korean (한글 버전)
 
+## 개요
+
 TensorFlow 2.9.1 의 [tensorflow/tensorflow:2.9.1-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.9.1-gpu-jupyter/images/sha256-6345c1f2eaaf7b8efc9b8ec7f62869e6490db80e07ae5b856d5c16b48146daae?context=explore)의 도커를 베이스로 확장하여 GPU 전용 Docker파일(gpu.Dockerfile)을 구성하였습니다. 
 
 TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
 
-**docker-kaggle-ko**를 만들게 된 계기는 안정적으로 업데이트 되고 있는 tensorflow/tensorflow-gpu-jupyter에 기반하여 한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
+본 Repository를 만들게 된 계기는 안정적으로 업데이트 되고 있는 `tensorflow/tensorflow-gpu-jupyter`에 기반하여 한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
 
 - **GPU** 버전 도커 **Hub** 주소: [teddylee777/docker-kaggle-ko](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko)
 - **CPU** 버전 도커 **Hub** 주소: [teddylee777/docker-kaggle-ko-cpu](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko-cpu)
@@ -13,7 +15,8 @@ TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 
 **추가 패키지 요청은 issue 를 통해 요청해 주세요! 검토 후 반영 혹은 미반영시 사유를 남기도록 하겠습니다.**
 
 
-## 도커 환경
+
+## 테스트된 도커 환경
 
 - OS: Ubuntu18.04
 - GPU: RTX3090 x 2way
@@ -81,7 +84,7 @@ xgboost                      2.0.0.dev0
 
 
 
-## 빠른 설치 및 실행
+## 실행 방법
 
 ### STEP 1: Docker가 사전에 설치되어 있어야 합니다.
 
@@ -105,7 +108,9 @@ sudo systemctl enable docker
 docker --version
 ```
 
-### STEP 2: docker-kaggle-ko 이미지 pull 하여 서버 실행
+
+
+### STEP 2: 도커 이미지 pull 하여 서버 실행
 
 - `--rm`: 도커가 종료될 때 컨테이너 삭제
 - `-it`: 인터랙티브 TTY 모드 (디폴트로 설정)
@@ -118,9 +123,39 @@ docker --version
 
 **DockerHub에서 이미지 다운로드**
 
-DockerHub에 미리 빌드된 이미지를 다운로드 받은 후 실행합니다.
+DockerHub에 미리 빌드된 이미지를 다운로드 받은 후 실행합니다. (스트레스가 없다는 것이 장점입니다. 다만, 다운로드 시간은 오래 걸립니다.)
 
-(스트레스가 없다는 것이 장점입니다. 다만, 다운로드 시간은 오래 걸립니다.)
+
+
+> jupyter notebook 서버 실행, port는 8888번 포트 사용
+
+```bash
+docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest
+```
+
+
+
+> jupyter notebook 서버 실행, 로컬 volume 마운트
+
+```bash
+docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/docker-kaggle-ko:latest
+```
+
+
+> 도커를 background에서 실행
+
+```bash
+docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/docker-kaggle-ko:latest
+```
+
+
+
+> bash shell 진입
+
+```bash
+docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest /bin/bash
+```
+
 
 **[참고]**
 
@@ -130,136 +165,19 @@ DockerHub에 미리 빌드된 이미지를 다운로드 받은 후 실행합니�
 
 
 
-> jupyter notebook 서버 실행, port는 8888번 포트 사용
-
-**GPU**
-```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest
-```
-
-**CPU**
-```bash
-docker run --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest
-```
-
-> jupyter notebook 서버 실행, 로컬 volume 마운트
-
-**GPU**
-```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/docker-kaggle-ko:latest
-```
-**CPU**
-```bash
-docker run --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/docker-kaggle-ko-cpu:latest
-```
-
-> 도커를 background에서 실행
-
-**GPU**
-```bash
-docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/docker-kaggle-ko:latest
-```
-
-**CPU**
-```bash
-docker run --rm -itd -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest
-```
-
-> bash shell 진입
-
-**GPU**
-```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest /bin/bash
-```
-**CPU**
-```bash
-docker run --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest /bin/bash
-```
-
-
-## 빌드 (위의 빠른 실행으로 실행시 SKIP 가능)
-
-DockerHub에서 다운로드 받은 도커 이미지로 실행시 **빌드 과정은 생략** 가능합니다.
-
-### DockerHub 다운로드
-
-DockerHub에 미리 만들어 놓은 이미지를 다운로드 받습니다.
-
-스트레스가 없다는 것이 장점입니다. 다운로드 시간은 오래 걸립니다.
-
-**GPU**
-```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest
-```
-
-**CPU**
-```bash
-docker run --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko-cpu:latest
-```
-
-
-### Dockerfile을 수정하여 직접 빌드
-
-커스텀이 가능합니다. 필요한 추가 패키지가 있다면 추가 구성이 가능합니다.
-
-추가 패키지 설치를 위해서는 Dockerfile을 수정하시면 됩니다.
-
-**참고**
-
-- DockerHub 유저 아이디: teddylee777
-- 도커명: docker-kaggle-ko
-- 태그: latest
-
-**GPU**
-```bash
-git clone https://github.com/teddylee777/docker-kaggle-ko.git
-cd docker-kaggle-ko
-docker build -f gpu.Dockerfile -t teddylee777/docker-kaggle-ko:latest .
-```
-
-**CPU**
-```bash
-docker build -f cpu.Dockerfile -t teddylee777/docker-kaggle-ko-cpu:latest .
-```
-
-
-## 도커 실행
-
-- `--rm`: 도커가 종료될 때 컨테이너 삭제
-- `-it`: 인터랙티브 TTY 모드 (디폴트로 설정)
-- `-d`: 도커를 백그라운드로 실행
-- `-p`: 포트 설정. **local 포트:도커 포트**
-- `-v`: local 볼륨 마운트. **local 볼륨:도커 볼륨**
-- `--name`: 도커의 별칭(name) 설정
-
-**GPU**
-```bash
-docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko
-```
-
-**CPU**
-```bash
-docker run --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko-cpu
-```
-
 ## .bashrc에 단축 커멘드 지정
 
 `~/.bashrc`의 파일에 아래 커멘드를 추가하여 단축키로 Docker 실행
 
 **GPU**
+
 ```bash
 kjupyter{
-    docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko
-}
-```
-**CPU**
-```bash
-kjupyter{
-    docker run --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name kaggle-ko teddylee777/docker-kaggle-ko-cpu
+    docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name dl-ko teddylee777/docker-kaggle-ko
 }
 ```
 
-터미널에 다음과 같이 입력하여 도커 실행
+>  터미널에 다음과 같이 입력하여 도커 실행
 
 ```bash
 kjupyter
@@ -375,6 +293,7 @@ xgb = XGBRegressor(n_estimators=1000,
 
 print(model_test('xgb (gpu)', xgb))
 ```
+
 ```
 xgb (cpu): 소요시간: 35.86732840538025 초
 xgb (gpu): 소요시간: 6.682094573974609 초
