@@ -10,7 +10,7 @@ TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 
 
 - **GPU** 버전 도커 **Hub** 주소: [teddylee777/docker-kaggle-ko](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko)
 - **CPU** 버전 도커 **Hub** 주소: [teddylee777/docker-kaggle-ko-cpu](https://hub.docker.com/repository/docker/teddylee777/docker-kaggle-ko-cpu)
-- **GitHub** 주소: [https://github.com/teddylee777/datascience-docker-ko](https://github.com/teddylee777/datascience-docker-ko)
+- **GitHub** 주소: [github.com/teddylee777/datascience-docker-ko](https://github.com/teddylee777/datascience-docker-ko)
 
 **추가 패키지 요청은 issue 를 통해 요청해 주세요! 검토 후 반영 혹은 미반영시 사유를 남기도록 하겠습니다.**
 
