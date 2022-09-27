@@ -150,7 +150,7 @@ docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/docker-kaggle-ko:
 
 
 
-> bash shell 진입
+> 도커 launch 후 bash shell 진입
 
 ```bash
 docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:latest /bin/bash
