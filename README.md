@@ -169,7 +169,6 @@ docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/docker-kaggle-ko:l
 
 `~/.bashrc`의 파일에 아래 커멘드를 추가하여 단축키로 Docker 실행
 
-**GPU**
 
 ```bash
 kjupyter{
