@@ -1,5 +1,5 @@
 # local 빌드시
-FROM tensorflow/tensorflow:2.9.1-gpu-jupyter
+FROM tensorflow/tensorflow:2.11.0-gpu-jupyter
 FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu18.04 AS nvidia
 
 # CUDA
@@ -60,11 +60,11 @@ RUN echo "export PATH=$CONDA_DIR/bin:"'$PATH' > /etc/profile.d/conda.sh && \
 
 # Conda 가상환경 생성
 RUN conda config --set always_yes yes --set changeps1 no && \
-    conda create -y -q -n py37 python=3.7
+    conda create -y -q -n py38 python=3.8
 
-ENV PATH /opt/conda/envs/py37/bin:$PATH
-ENV CONDA_DEFAULT_ENV py37
-ENV CONDA_PREFIX /opt/conda/envs/py37
+ENV PATH /opt/conda/envs/py38/bin:$PATH
+ENV CONDA_DEFAULT_ENV py38
+ENV CONDA_PREFIX /opt/conda/envs/py38
 
 # 패키지 설치
 RUN pip install setuptools && \
@@ -72,7 +72,7 @@ RUN pip install setuptools && \
     pip install pymysql && \
     pip install numpy && \
     pip install scipy && \
-    pip install pandas==1.3.5 && \
+    pip install pandas && \
     pip install jupyter notebook && \
     pip install jupyterlab && \
     pip install jupyterthemes && \
@@ -89,7 +89,7 @@ RUN pip install setuptools && \
     pip install nbconvert && \
     pip install Pillow && \
     pip install tqdm && \
-    pip install tensorflow==2.9.1 && \
+    pip install tensorflow==2.11.0 && \
     pip install tensorflow-datasets && \
     pip install gensim && \
     pip install nltk && \
@@ -99,6 +99,7 @@ RUN pip install setuptools && \
 
 # Pytorch 설치
 RUN pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install torchtext==0.11.1
 
 RUN pip install --upgrade cython && \
     pip install --upgrade cysignals && \
@@ -129,7 +130,7 @@ ENV PATH=/usr/local/bin:${PATH}
 # 나눔고딕 폰트 설치
 # matplotlib에 Nanum 폰트 추가
 RUN apt-get install fonts-nanum* && \
-    cp /usr/share/fonts/truetype/nanum/Nanum* /opt/conda/envs/py37/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/ && \
+    cp /usr/share/fonts/truetype/nanum/Nanum* /opt/conda/envs/py38/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf/ && \
     fc-cache -fv && \
     rm -rf ~/.cache/matplotlib/*
 
