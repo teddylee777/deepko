@@ -2,9 +2,9 @@
 
 ## 개요
 
-TensorFlow 2.9.1 의 [tensorflow/tensorflow:2.9.1-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.9.1-gpu-jupyter/images/sha256-6345c1f2eaaf7b8efc9b8ec7f62869e6490db80e07ae5b856d5c16b48146daae?context=explore)의 도커를 베이스로 확장하여 GPU 전용 Docker파일(`gpu.Dockerfile`)을 구성하였습니다. 
+TensorFlow 2.11.0 의 [tensorflow/tensorflow:2.11.0-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.11.0-gpu-jupyter/images/sha256-fc519621eb9a54591721e9019f1606688c9abb329b16b00cc7107c23f14a6f24?context=explore)의 도커를 베이스로 확장하여 GPU 전용 Docker파일(`gpu.Dockerfile`)을 구성하였습니다. 
 
-TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
+TensorFlow에서 유지보수하고 있는 `2.11.0-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
 
 본 Repository를 만들게 된 계기는 안정적으로 업데이트 되고 있는 `tensorflow/tensorflow-gpu-jupyter`에 기반하여 한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
 
@@ -19,7 +19,7 @@ TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 
 - OS: Ubuntu18.04
 - GPU: RTX3090 x 2way
 - CUDA: 11.2
-- Python (anaconda): 3.7.10
+- Python (anaconda): 3.8
 
 
 
@@ -41,42 +41,54 @@ TensorFlow에서 유지보수하고 있는 `2.9.1-gpu-jupyter` 도커의 경우 
 ## 설치된 주요 라이브러리
 
 ```
-catboost                     1.0.6
-fastai                       2.7.7
-fbprophet                    0.7.1
-gensim                       4.2.0
-huggingface-hub              0.8.1
+beautifulsoup4               4.11.1
+catboost                     1.1.1
+fastai                       2.7.10
+fasttext                     0.9.2
+folium                       0.14.0
+gensim                       4.3.0
+graphviz                     0.20.1
+huggingface-hub              0.11.1
 hyperopt                     0.2.7
 jupyter                      1.0.0
-keras                        2.9.0
-Keras-Preprocessing          1.1.2
+jupyterlab                   3.5.2
+kaggle                       1.5.12
+keras                        2.11.0
 konlpy                       0.6.0
-lightgbm                     3.3.2
-MarkupSafe                   2.1.1
-matplotlib                   3.5.2
+librosa                      0.9.2
+lightgbm                     3.3.4
+matplotlib                   3.6.3
 mecab-python                 0.996-ko-0.9.2
-mlxtend                      0.20.0
-notebook                     6.4.12
-numpy                        1.21.6
-opencv-python                4.6.0.66
-optuna                       2.10.1
-pandas                       1.3.5
-pip                          22.1.2
-plotly                       5.9.0
+mlxtend                      0.21.0
+nltk                         3.8.1
+numpy                        1.23.5
+opencv-python                4.7.0.68
+optuna                       3.0.5
+pandas                       1.5.2
+Pillow                       9.4.0
+plotly                       5.12.0
+prophet                      1.1.1
 PyMySQL                      1.0.2
-scikit-learn                 1.0.2
-scipy                        1.7.3
-seaborn                      0.11.2
-spacy                        3.4.0
-SQLAlchemy                   1.4.39
-tensorboard                  2.9.1
-tensorflow                   2.9.1
-tensorflow-datasets          4.6.0
+scikit-image                 0.19.3
+scikit-learn                 1.2.0
+scipy                        1.8.1
+seaborn                      0.12.2
+sentencepiece                0.1.86
+spacy                        3.4.4
+SQLAlchemy                   1.4.46
+tensorboard                  2.11.0
+tensorflow                   2.11.0
+tensorflow-datasets          4.8.1
+tokenizers                   0.13.2
 torch                        1.10.1+cu111
 torchaudio                   0.10.1+rocm4.1
+torchsummary                 1.5.1
+torchtext                    0.11.1
 torchvision                  0.11.2+cu111
-transformers                 4.20.1
-wandb                        0.12.21
+tqdm                         4.64.1
+transformers                 4.25.1
+wandb                        0.13.9
+wordcloud                    1.8.2.2
 xgboost                      2.0.0.dev0
 ```
 
