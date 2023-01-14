@@ -1,6 +1,6 @@
-# Deepko
+# deepko
 
-**Deepko** (**DEEP** learning docker for **KO**rean) 는 <u>파이썬(Python) 기반의 데이터 분석 / 머신러닝 / 딥러닝 도커(docker)</u> 입니다.
+**deepko** (**DEEP** learning docker for **KO**rean) 는 <u>파이썬(Python) 기반의 데이터 분석 / 머신러닝 / 딥러닝 도커(docker)</u> 입니다.
 
 - 파이썬 기반의 데이터 분석, 머신러닝, 딥러닝 프레임워크의 상호 의존성 충돌을 해결 후 배포합니다.
 
@@ -213,3 +213,15 @@ kjupyter{
 ```bash
 kjupyter
 ```
+
+
+
+
+
+---
+
+
+
+**추가 파이썬 패키지 설치 제안은 issue 에 남겨주세요!**
+
+감사합니다.
