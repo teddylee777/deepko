@@ -10,7 +10,7 @@
 
 먼저 내가 베이스(base)가 될만 한 도커를 선정하고 이를 클론(Clone)한 뒤 확장해 나가는 방식이 편합니다. 처음부터 작성을 하지 않아도 되기 때문입니다.
 
-`deepko`(https://github.com/teddylee777/deepko.git)를  클론(clone) 하여 원하는 패키지를 추가하셔도 좋습니다.
+`deepko`(https://github.com/teddylee777/deepko.git) 를  클론(clone) 하여 원하는 패키지를 추가하셔도 좋습니다.
 
 ```bash
 git clone https://github.com/teddylee777/deepko.git
