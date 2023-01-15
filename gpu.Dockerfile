@@ -191,6 +191,12 @@ RUN pip uninstall -y lightgbm && \
     make -j$(nproc) OPENCL_HEADERS=/usr/local/cuda-11.2/targets/x86_64-linux/include LIBOPENCL=/usr/local/cuda-11.2/targets/x86_64-linux/lib && \
     cd /usr/local/src/lightgbm/LightGBM/python-package && python setup.py install --precompile
 
+# soynlp, KR-WordRank, soyspacing, customized_konlpy 설치
+RUN pip install soynlp && \
+    pip install krwordrank && \
+    pip install soyspacing && \
+    pip install customized_konlpy
+
 # Remove the CUDA stubs.
 ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH_NO_STUBS"
 
@@ -213,7 +219,7 @@ ENV LANG ko_KR.UTF-8
 # COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
 # 설치 완료 후 테스트용 ipynb
-COPY test.ipynb /home/jupyter/test.ipynb
+COPY ./01-GPU-TEST/GPU-Test.ipynb /home/jupyter/GPU-Test.ipynb
 
 # 기본
 EXPOSE 8888
