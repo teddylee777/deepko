@@ -185,7 +185,7 @@ docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/deepko:preview
 4. 도커를 실행 후 **bash shell로 진입**하려는 경우
 
 ```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:latest /bin/bash
+docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:preview /bin/bash
 ```
 
 
