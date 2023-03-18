@@ -31,6 +31,9 @@ TensorFlow에서 유지보수하고 있는 `2.12.0rc1-gpu-jupyter` 도커의 경
 - **CUDA: 11.8** (2023년 03월 18일 업데이트)
 - Python (anaconda): 3.8
 
+## CUDA 11.8 업데이트 방법
+
+링크: https://teddylee777.github.io/linux/ubuntu2004-cuda-update/
 
 
 ## 한글 관련 추가 패키지
