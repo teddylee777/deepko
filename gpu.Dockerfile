@@ -1,10 +1,10 @@
 # local 빌드시
-FROM tensorflow/tensorflow:2.11.0-gpu-jupyter
-FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu18.04 AS nvidia
+FROM tensorflow/tensorflow:2.12.0rc1-gpu-jupyter
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04 AS nvidia
 
 # CUDA
 ENV CUDA_MAJOR_VERSION=11
-ENV CUDA_MINOR_VERSION=2
+ENV CUDA_MINOR_VERSION=8
 ENV CUDA_VERSION=$CUDA_MAJOR_VERSION.$CUDA_MINOR_VERSION
 
 ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/opt/bin:${PATH}
@@ -15,6 +15,9 @@ ENV LD_LIBRARY_PATH="/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/cu
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_REQUIRE_CUDA="cuda>=$CUDA_MAJOR_VERSION.$CUDA_MINOR_VERSION"
+
+ENV TZ=Asia/Seoul
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 카카오 ubuntu archive mirror server 추가. 다운로드 속도 향상
 RUN sed -i 's@archive.ubuntu.com@mirror.kakao.com@g' /etc/apt/sources.list && \
@@ -89,17 +92,13 @@ RUN pip install setuptools && \
     pip install nbconvert && \
     pip install Pillow && \
     pip install tqdm && \
-    pip install tensorflow==2.11.0 && \
     pip install tensorflow-datasets && \
     pip install gensim && \
     pip install nltk && \
     pip install wordcloud && \
+    pip install statsmodels && \
     apt-get install -y graphviz && pip install graphviz && \
-    pip install cupy-cuda112
-
-# Pytorch 설치
-RUN pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html
-RUN pip install torchtext==0.11.1
+    pip install cupy-cuda11x
 
 RUN pip install --upgrade cython && \
     pip install --upgrade cysignals && \
@@ -114,7 +113,8 @@ RUN pip install pystan==2.19.1.1 && \
 RUN pip install "sentencepiece<0.1.90" wandb tensorboard albumentations pydicom opencv-python scikit-image pyarrow kornia \
     catalyst captum
 
-RUN pip install fastai 
+RUN pip install fastai && \
+    pip install fvcore 
 # RUN conda install -c rapidsai -c nvidia -c numba -c conda-forge cudf=22.06 python=3.7 cudatoolkit=11.2
 
 # cmake 설치 (3.16)
@@ -167,15 +167,17 @@ RUN cd /tmp && \
     python setup.py install
 
 # XGBoost (GPU 설치)
-RUN git clone --recursive https://github.com/dmlc/xgboost && \
-    cd xgboost && \
-    mkdir build && \
-    cd build && \
-    cmake .. -DUSE_CUDA=ON && \
-    make -j4 && \
-    cd .. && \
-    cd python-package && \
-    python setup.py install --use-cuda --use-nccl
+# RUN git clone --recursive https://github.com/dmlc/xgboost && \
+#    cd xgboost && \
+#    mkdir build && \
+#    cd build && \
+#    cmake .. -DUSE_CUDA=ON && \
+#    make -j4 && \
+#    cd .. && \
+#    cd python-package && \
+#    python setup.py install --use-cuda --use-nccl
+RUN pip install xgboost
+
 
 # Install OpenCL & libboost (required by LightGBM GPU version)
 RUN apt-get install -y ocl-icd-libopencl1 clinfo libboost-all-dev && \
@@ -196,6 +198,13 @@ RUN pip install soynlp && \
     pip install krwordrank && \
     pip install soyspacing && \
     pip install customized_konlpy
+
+# PyTorch 2.0 설치
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+RUN pip install torchtext==0.15.1
+
+# TensorFlow 2.12.0rc1 설치
+RUN pip install tensorflow==2.12.0rc1
 
 # Remove the CUDA stubs.
 ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH_NO_STUBS"
