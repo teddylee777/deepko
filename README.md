@@ -9,14 +9,13 @@
 - **GPU** 를 지원합니다 (`LightGBM`, `XGBoost`, `PyTorch`, `TensorFlow`).
 
 - 도커를 통한 빠른 설치와 실행이 가능합니다.
-
   
 
 ## 개요
 
-TensorFlow 2.11.0 의 [tensorflow/tensorflow:2.11.0-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.11.0-gpu-jupyter/images/sha256-fc519621eb9a54591721e9019f1606688c9abb329b16b00cc7107c23f14a6f24?context=explore)의 도커를 베이스로 확장하여 GPU 전용 Docker파일(`gpu.Dockerfile`)을 구성하였습니다. 
+TensorFlow 의 [tensorflow/tensorflow:2.12.0rc1-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.12.0rc1-gpu-jupyter/images/sha256-38561c1cb2829316ca7b8e0396608e4c2b383a6fdf1411e79f7257f1d35bd204?context=explore)의 도커를 베이스로 확장하여 GPU 전용 Docker파일(`gpu.Dockerfile`)을 구성하였습니다. 
 
-TensorFlow에서 유지보수하고 있는 `2.11.0-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
+TensorFlow에서 유지보수하고 있는 `2.12.0rc1-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
 
 본 Repository를 만들게 된 계기는 안정적으로 업데이트 되고 있는 `tensorflow/tensorflow-gpu-jupyter`에 기반하여 한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
 
@@ -27,9 +26,9 @@ TensorFlow에서 유지보수하고 있는 `2.11.0-gpu-jupyter` 도커의 경우
 
 ## 테스트된 도커 환경
 
-- OS: Ubuntu 18.04
+- OS: Ubuntu 20.04
 - GPU: RTX3090 x 2 way
-- **CUDA: 11.2~11.4**
+- **CUDA: 11.8** (2023년 03월 18일 업데이트)
 - Python (anaconda): 3.8
 
 
@@ -49,53 +48,57 @@ TensorFlow에서 유지보수하고 있는 `2.11.0-gpu-jupyter` 도커의 경우
 
 ```
 catboost                     1.1.1
-fastai                       2.7.10
+cmake                        3.26.0
+fastai                       2.7.11
 fasttext                     0.9.2
 folium                       0.14.0
-gensim                       4.3.0
+gensim                       4.3.1
 graphviz                     0.20.1
-huggingface-hub              0.11.1
+huggingface-hub              0.13.2
 hyperopt                     0.2.7
-jupyter                      1.0.0
-jupyterlab                   3.5.2
-kaggle                       1.5.12
-keras                        2.11.0
+jupyterlab                   3.6.1
+kaggle                       1.5.13
+keras                        2.12.0rc1
 konlpy                       0.6.0
-librosa                      0.9.2
-lightgbm                     3.3.4
-matplotlib                   3.6.3
+librosa                      0.10.0.post2
+lightgbm                     3.3.5
+matplotlib                   3.7.1
 mecab-python                 0.996-ko-0.9.2
+missingno                    0.5.2
 mlxtend                      0.21.0
-nltk                         3.8.1
+notebook                     6.5.3
 numpy                        1.23.5
-opencv-python                4.7.0.68
-optuna                       3.0.5
-pandas                       1.5.2
-Pillow                       9.4.0
-plotly                       5.12.0
-prophet                      1.1.1
+opencv-python                4.7.0.72
+optuna                       3.1.0
+pandas                       1.5.3
+plotly                       5.13.1
+prophet                      1.1.2
+pyfasttext                   0.4.6
 PyMySQL                      1.0.2
-scikit-image                 0.19.3
-scikit-learn                 1.2.0
-scipy                        1.8.1
+QtPy                         2.3.0
+scikit-image                 0.20.0
+scikit-learn                 1.2.2
+scipy                        1.9.1
 seaborn                      0.12.2
 sentencepiece                0.1.86
-spacy                        3.4.4
-SQLAlchemy                   1.4.46
-tensorboard                  2.11.0
-tensorflow                   2.11.0
-tensorflow-datasets          4.8.1
+soynlp                       0.0.493
+soyspacing                   1.0.17
+spacy                        3.5.1
+SQLAlchemy                   2.0.6
+tensorboard                  2.12.0
+tensorflow                   2.12.0rc1
+tensorflow-datasets          4.8.3
 tokenizers                   0.13.2
-torch                        1.10.1+cu111
-torchaudio                   0.10.1+rocm4.1
+torch                        2.0.0+cu118
+torchaudio                   2.0.1+cu118
+torchdata                    0.6.0
 torchsummary                 1.5.1
-torchtext                    0.11.1
-torchvision                  0.11.2+cu111
-tqdm                         4.64.1
-transformers                 4.25.1
-wandb                        0.13.9
+torchtext                    0.15.1
+torchvision                  0.15.1+cu118
+transformers                 4.27.1
+wandb                        0.14.0
 wordcloud                    1.8.2.2
-xgboost                      2.0.0.dev0
+xgboost                      1.7.4
 ```
 
 
@@ -104,10 +107,10 @@ xgboost                      2.0.0.dev0
 
 다음의 라이브러리에 대하여 **GPU를 지원**합니다.
 
-1. `LightGBM` (3.3.4)
-2. `XGBoost` (2.0.0.dev0)
-3. `PyTorch` (1.10.1) + CUDA 11.1
-4. `TensorFlow` (2.11.0) + CUDA 11.2
+1. `LightGBM` (3.3.5)
+2. `XGBoost` (1.7.4)
+3. `PyTorch` (2.0.0) + CUDA 11.8
+4. `TensorFlow` (2.12.0rc1) + CUDA 11.8
 
 
 
@@ -158,7 +161,7 @@ docker --version
 1. `Jupyter Notebook` 을 **8888번 포트로 실행**하려는 경우
 
 ```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:latest
+docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:preview
 ```
 
 
@@ -166,7 +169,7 @@ docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:latest
 2. `jupyter notebook` 서버 실행과 동시에 **로컬 volume 마운트**
 
 ```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/deepko:latest
+docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/deepko:preview
 ```
 
 
@@ -174,7 +177,7 @@ docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/ju
 3. 도커를 **background에서 실행**하는 경우 (터미널을 종료해도 서버 유지)
 
 ```bash
-docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/deepko:latest
+docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/deepko:preview
 ```
 
 
@@ -182,7 +185,7 @@ docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/deepko:latest
 4. 도커를 실행 후 **bash shell로 진입**하려는 경우
 
 ```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:latest /bin/bash
+docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:preview /bin/bash
 ```
 
 
@@ -202,7 +205,7 @@ docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:latest /bin
 
 ```bash
 kjupyter{
-    docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name dl-ko teddylee777/deepko
+    docker run --runtime nvidia --rm -itd -p 8888:8888 -v /data/jupyter_data:/home/jupyter --name dl-ko teddylee777/deepko:preview
 }
 ```
 
