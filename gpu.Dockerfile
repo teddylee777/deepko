@@ -1,5 +1,5 @@
 # local 빌드시
-FROM tensorflow/tensorflow:2.13.0-gpu-jupyter
+FROM tensorflow/tensorflow:2.13.0-gpu-jupyter 
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 AS nvidia
 
 # CUDA
@@ -70,6 +70,7 @@ RUN conda config --set always_yes yes --set changeps1 no && \
 ENV PATH /opt/conda/envs/py39/bin:$PATH
 ENV CONDA_DEFAULT_ENV py39
 ENV CONDA_PREFIX /opt/conda/envs/py39
+ENV PATH=/usr/local/bin:${PATH}
 
 RUN apt-get update
 
@@ -84,7 +85,7 @@ RUN pip install setuptools && \
     pip install pymysql && \
     pip install numpy && \
     pip install scipy && \
-    pip install pandas==1.5.3 && \
+    pip install pandas && \
     pip install matplotlib && \
     pip install seaborn && \
     pip install hyperopt && \
@@ -110,11 +111,13 @@ RUN apt-get install -y graphviz && \
     apt-get install -y graphviz-dev && \
     pip install pygraphviz
 
+RUN apt-get update
+
 RUN pip install graphviz && \
     pip install cupy-cuda11x
 
-RUN pip install --upgrade cython && \
-    pip install --upgrade cysignals && \
+RUN pip install -U cython && \
+    pip install -U cysignals && \
     pip install pyfasttext && \
     pip install fasttext && \
     pip install accelerate && \
@@ -138,9 +141,10 @@ RUN pip install fastai && \
 RUN pip install openai && \
     pip install langchain && \
     pip install duckduckgo-search && \
-    pip install pypdf
-
-RUN pip install pandas==1.5.3
+    pip install pypdf && \
+    pip install tiktoken && \
+    pip install chromadb && \
+    pip install pinecone-client
 
 RUN pip install cudf-cu11 dask-cudf-cu11 cuml-cu11 --extra-index-url=https://pypi.nvidia.com
 
@@ -149,21 +153,7 @@ RUN pip install -U "ipython[all]"
 RUN git clone https://github.com/slundberg/shap.git && cd shap && \
     python setup.py install
 
-# Jupyter Notebook Extension 설정
-# ARG CONDA_DIR=/opt/conda/envs/py39
-
-#RUN conda install -c conda-forge jupyter && \
-#    conda install -c conda-forge jupyterlab && \
-#    conda install -c conda-forge notebook && \
-#    conda install -c conda-forge jupyter_nbextensions_configurator && \
-#    conda install -c conda-forge jupyter_contrib_nbextensions && \
-#    conda install -c conda-forge jupyterthemes
-
-#RUN conda install -c conda-forge ipywidgets
 RUN pip install jupyter jupyterlab notebook jupyterthemes ipywidgets
-# RUN jupyter nbextensions_configurator enable
-# RUN jupyter contrib nbextension install
-# RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix
  
 ENV PATH=/usr/local/bin:${PATH}
 
@@ -174,41 +164,14 @@ RUN cp /usr/share/fonts/truetype/nanum/Nanum* /opt/conda/envs/py39/lib/python3.9
     fc-cache -fv && \
     rm -rf ~/.cache/matplotlib/*
 
-# konlpy, py-hanspell, soynlp 패키지 설치 
-RUN pip install konlpy
+# Mecab 설치
+RUN apt-get update
+RUN apt-get install g++ openjdk-8-jdk
+RUN pip install konlpy JPype1-py3
+RUN bash -c "bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)"; exit 0
 
-# 형태소 분석기 mecab 설치
-# RUN cd /tmp && \
-#    wget "https://www.dropbox.com/s/9xls0tgtf3edgns/mecab-0.996-ko-0.9.2.tar.gz?dl=1" && \
-#    tar zxfv mecab-0.996-ko-0.9.2.tar.gz?dl=1 && \
-#    cd mecab-0.996-ko-0.9.2 && \
-#    ./configure && \
-#    make && \
-#    make check && \
-#    make install && \
-#    ldconfig
-
-# RUN apt-get update
-
-# RUN cd /tmp && \
-#   wget "https://www.dropbox.com/s/i8girnk5p80076c/mecab-ko-dic-2.1.1-20180720.tar.gz?dl=1" && \
-#    apt install -y autoconf && \
-#    tar zxfv mecab-ko-dic-2.1.1-20180720.tar.gz?dl=1 && \
-#    cd mecab-ko-dic-2.1.1-20180720 && \
-#    ./autogen.sh && \
-#    ./configure && \
-#    make && \
-#    make install && \
-#    ldconfig
-
-# 형태소 분석기 mecab 파이썬 패키지 설치
-# RUN cd /tmp && \
-#    git clone https://bitbucket.org/eunjeon/mecab-python-0.996.git && \
-#    cd mecab-python-0.996 && \
-#    python setup.py build && \
-#    python setup.py install
-
-# RUN apt-get update
+# mecab-python의 버전 오류로 인해 아래 패키지를 설치하면 코랩에서 Mecab을 사용가능
+RUN pip install mecab-python3
 
 # XGBoost (GPU 설치)
 RUN pip install xgboost && \
