@@ -8,6 +8,7 @@ RUN sed -i 's@archive.ubuntu.com@mirror.kakao.com@g' /etc/apt/sources.list && \
     apt-get update
 
 # 패키지 설치
+# Data Science
 RUN pip install setuptools && \
     pip install pymysql && \
     pip install numpy && \
@@ -24,19 +25,36 @@ RUN pip install setuptools && \
     pip install notebook && \
     pip install openpyxl
 
+# ML
 RUN pip install scikit-learn && \
     pip install lightgbm && \
     pip install xgboost && \
     pip install hyperopt && \
     pip install optuna && \
     pip install mlxtend && \ 
-    pip install shap
+    pip install shap && \ 
+    pip install transformers && \
+    pip install datasets
 
+# ChatGPT
 RUN pip install openai && \
     pip install langchain && \
-    pip install chromadb && \
     pip install pandasai
 
+# Langchain Modules
+RUN pip install tiktoken && \
+    pip install google-search-results
+
+# PDF Reader
+RUN pip install pypdf && \
+    pip install pycryptodome
+
+# Vector Store
+RUN pip install faiss-cpu && \
+    pip install chromadb && \
+    pip install lancedb
+
+# Web Service
 RUN pip install streamlit && \
     pip install gradio
 
