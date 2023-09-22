@@ -1,10 +1,10 @@
 # DataScience Notebook 도커(한글 패키지 지원)
 
-`teddylee777/datascience-notebook` 는 <u>파이썬(Python) 기반의 데이터 분석, 머신러닝 도커(docker) 이미지</u> 입니다.
+`teddylee777/datascience-notebook` 는 *파이썬(Python) 기반의 데이터 분석, 머신러닝 도커(docker) 이미지* 입니다.
 
 - 도커 이미지 주소: https://hub.docker.com/r/teddylee777/datascience-notebook
 
-> 🔥 빠른 실행
+🔥 빠른 실행
 
 ```bash
 docker run --rm -itd --name notebook -p 8888:8888 -v 마운트할로컬드라이브경로:/home/jovyan/work teddylee777/datascience-notebook:latest
