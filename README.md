@@ -4,20 +4,20 @@
 
 - 파이썬 기반의 데이터 분석, 머신러닝, 딥러닝 프레임워크의 상호 의존성 충돌을 해결 후 배포합니다.
 
-- **한글 폰트, 한글 자연어 처리(형태소 분석기)** 를 위한 라이브러리가 사전에 설치되어 있습니다.
+- **한글 폰트(나눔폰트, D2Coding), 한글 자연어 처리(konlpy, soynlp, mecab 등)** 를 위한 라이브러리가 사전에 설치되어 있습니다.
 
 - **GPU** 를 지원합니다 (`LightGBM`, `XGBoost`, `PyTorch`, `TensorFlow`).
 
-- 도커를 통한 빠른 설치와 실행이 가능합니다.
+- 도커를 통한 **빠른 설치와 실행**이 가능합니다.
   
 
 ## 개요
 
-TensorFlow 의 [tensorflow/tensorflow:2.12.0rc1-gpu-jupyter](https://hub.docker.com/layers/tensorflow/tensorflow/2.12.0rc1-gpu-jupyter/images/sha256-38561c1cb2829316ca7b8e0396608e4c2b383a6fdf1411e79f7257f1d35bd204?context=explore)의 도커를 베이스로 확장하여 GPU 전용 Docker파일(`gpu.Dockerfile`)을 구성하였습니다. 
+TensorFlow 의 `tensorflow/tensorflow:2.x.x-gpu-jupyter` 의 도커를 베이스로 확장하여 GPU 전용 Docker파일(`gpu.Dockerfile`)을 구성하였습니다. 
 
-TensorFlow에서 유지보수하고 있는 `2.12.0rc1-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
+TensorFlow에서 유지보수하고 있는 `tensorflow/tensorflow:2.x.x-gpu-jupyter` 도커의 경우 한글 형태소 분석기나 한글폰트, 그 밖에 PyTorch를 비롯한 여러 머신러닝/딥러닝 라이브러리가 제외되어 있기 때문에 필요한 라이브러리를 추가 설치하고 의존성에 문제가 없는지 확인한 후 배포하는 작업을 진행하고 있습니다.
 
-본 Repository를 만들게 된 계기는 안정적으로 업데이트 되고 있는 `tensorflow/tensorflow-gpu-jupyter`에 기반하여 한글 폰트, 한글 자연어처리 패키지(konlpy), 형태소 분석기(mecab), Timezone 등의 설정을 추가하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
+본 Repository를 만들게 된 계기는 안정적으로 업데이트 되고 있는 `tensorflow/tensorflow-gpu-jupyter`에 기반하여 한글 폰트(나눔폰트, D2Coding), 한글 자연어처리 패키지(konlpy, soynlp), 형태소 분석기(mecab), Timezone 등의 설정을 추가하여 별도의 한글 관련 패키지와 설정을 해줘야 하는 번거로움을 줄이기 위함입니다.
 
 - **GPU** 버전 도커 **Hub** 주소: [teddylee777/deepko](https://hub.docker.com/repository/docker/teddylee777/deepko)
 - **GitHub** 주소: [github.com/teddylee777/deepko](https://github.com/teddylee777/deepko)
@@ -28,7 +28,7 @@ TensorFlow에서 유지보수하고 있는 `2.12.0rc1-gpu-jupyter` 도커의 경
 
 - OS: Ubuntu 20.04
 - GPU: RTX3090 x 2 way
-- **CUDA: 11.8** (2023년 03월 18일 업데이트)
+- **CUDA: 11.8** (2023년 09월 23일 업데이트)
 - Python (anaconda): 3.8
 
 ## CUDA 11.8 업데이트 방법
@@ -47,6 +47,7 @@ TensorFlow에서 유지보수하고 있는 `2.12.0rc1-gpu-jupyter` 도커의 경
 - matplotlib 에 나눔폰트, D2Coding 폰트 추가
 - mecab 형태소 분석기 설치 및 파이썬 패키지 설치
 - [konlpy](https://konlpy-ko.readthedocs.io/ko/v0.4.3/): 한국어 정보처리를 위한 파이썬 패키지
+- soynlp: 한국어 자연어 처리를 위한 파이썬 패키지
 - `jupyter_notebook_config.py` : Jupyter Notebook 설정 파일 추가
 
 
@@ -54,70 +55,76 @@ TensorFlow에서 유지보수하고 있는 `2.12.0rc1-gpu-jupyter` 도커의 경
 ## 설치된 주요 라이브러리
 
 ```
-catboost                     1.1.1
-cmake                        3.26.0
-fastai                       2.7.11
-fasttext                     0.9.2
-folium                       0.14.0
-gensim                       4.3.1
-graphviz                     0.20.1
-huggingface-hub              0.13.2
-hyperopt                     0.2.7
-jupyterlab                   3.6.1
-kaggle                       1.5.13
-keras                        2.12.0rc1
-konlpy                       0.6.0
-librosa                      0.10.0.post2
-lightgbm                     3.3.5
-matplotlib                   3.7.1
-mecab-python                 0.996-ko-0.9.2
-missingno                    0.5.2
-mlxtend                      0.21.0
-notebook                     6.5.3
-numpy                        1.23.5
-opencv-python                4.7.0.72
-optuna                       3.1.0
-pandas                       1.5.3
-plotly                       5.13.1
-prophet                      1.1.2
-pyfasttext                   0.4.6
-PyMySQL                      1.0.2
-QtPy                         2.3.0
-scikit-image                 0.20.0
-scikit-learn                 1.2.2
-scipy                        1.9.1
-seaborn                      0.12.2
-sentencepiece                0.1.86
-soynlp                       0.0.493
-soyspacing                   1.0.17
-spacy                        3.5.1
-SQLAlchemy                   2.0.6
-tensorboard                  2.12.0
-tensorflow                   2.12.0rc1
-tensorflow-datasets          4.8.3
-tokenizers                   0.13.2
-torch                        2.0.0+cu118
-torchaudio                   2.0.1+cu118
-torchdata                    0.6.0
-torchsummary                 1.5.1
-torchtext                    0.15.1
-torchvision                  0.15.1+cu118
-transformers                 4.27.1
-wandb                        0.14.0
-wordcloud                    1.8.2.2
-xgboost                      1.7.4
+albumentations                1.3.1
+beautifulsoup4                4.12.2
+catboost                      1.2.1.1
+chromadb                      0.4.10
+dask                          2023.7.1
+datasets                      2.14.5
+fastai                        2.7.12
+folium                        0.14.0
+gensim                        4.3.2
+graphviz                      0.20.1
+huggingface-hub               0.16.4
+hyperopt                      0.2.7
+jupyter                       1.0.0
+jupyterlab                    4.0.6
+kaggle                        1.5.16
+keras                         2.13.1
+konlpy                        0.6.0
+langchain                     0.0.295
+librosa                       0.10.1
+lightgbm                      4.1.0
+matplotlib                    3.8.0
+mecab-python3                 1.0.7
+missingno                     0.5.2
+mlxtend                       0.22.0
+nltk                          3.8.1
+notebook                      7.0.3
+numpy                         1.24.3
+openai                        0.28.0
+opencv-python                 4.8.0.76
+optuna                        3.3.0
+pandas                        1.5.3
+peft                          0.6.0.dev0
+pinecone-client               2.2.4
+plotly                        5.17.0
+prophet                       1.1.4
+PyMySQL                       1.1.0
+pypdf                         3.16.1
+scikit-learn                  1.3.0
+scipy                         1.11.2
+seaborn                       0.12.2
+sentencepiece                 0.1.99
+shap                          0.42.
+soynlp                        0.0.493
+soyspacing                    1.0.17
+spacy                         3.6.1
+SQLAlchemy                    2.0.21
+statsmodels                   0.14.0
+tensorboard                   2.13.0
+tensorboardX                  2.6.2.2
+tensorflow                    2.13.0
+tiktoken                      0.5.1
+tokenizers                    0.14.0
+torch                         2.0.0
+torchaudio                    2.0.2+cu118
+torchtext                     0.15.1
+torchvision                   0.15.2
+transformers                  4.34.0.dev0
+wandb                         0.15.10
+xgboost                       2.0.0
 ```
-
 
 
 ## GPU 지원 라이브러리
 
 다음의 라이브러리에 대하여 **GPU를 지원**합니다.
 
-1. `LightGBM` (3.3.5)
-2. `XGBoost` (1.7.4)
+1. `LightGBM` (4.1.0)
+2. `XGBoost` (2.0.0)
 3. `PyTorch` (2.0.0) + CUDA 11.8
-4. `TensorFlow` (2.12.0rc1) + CUDA 11.8
+4. `TensorFlow` (2.13.0) + CUDA 11.8
 
 
 
@@ -168,7 +175,7 @@ docker --version
 1. `Jupyter Notebook` 을 **8888번 포트로 실행**하려는 경우
 
 ```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:preview
+docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:latest
 ```
 
 
@@ -176,7 +183,7 @@ docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:preview
 2. `jupyter notebook` 서버 실행과 동시에 **로컬 volume 마운트**
 
 ```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/deepko:preview
+docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/jupyter teddylee777/deepko:latest
 ```
 
 
@@ -184,7 +191,7 @@ docker run --runtime nvidia --rm -it -p 8888:8888 -v /data/jupyter_data:/home/ju
 3. 도커를 **background에서 실행**하는 경우 (터미널을 종료해도 서버 유지)
 
 ```bash
-docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/deepko:preview
+docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/deepko:latest
 ```
 
 
@@ -192,7 +199,7 @@ docker run --runtime nvidia --rm -itd -p 8888:8888 teddylee777/deepko:preview
 4. 도커를 실행 후 **bash shell로 진입**하려는 경우
 
 ```bash
-docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:preview /bin/bash
+docker run --runtime nvidia --rm -it -p 8888:8888 teddylee777/deepko:latest /bin/bash
 ```
 
 

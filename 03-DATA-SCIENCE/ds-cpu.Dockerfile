@@ -11,6 +11,7 @@ RUN sed -i 's@archive.ubuntu.com@mirror.kakao.com@g' /etc/apt/sources.list && \
 # Data Science
 RUN pip install setuptools && \
     pip install pymysql && \
+    pip install SQLAlchemy && \
     pip install numpy && \
     pip install scipy && \
     pip install missingno && \
@@ -23,7 +24,9 @@ RUN pip install setuptools && \
     pip install ipykernel && \
     pip install jupyter && \
     pip install notebook && \
-    pip install openpyxl
+    pip install openpyxl && \
+    pip install graphviz && \
+    pip install wordcloud
 
 # ML
 RUN pip install scikit-learn && \
@@ -31,6 +34,7 @@ RUN pip install scikit-learn && \
     pip install xgboost && \
     pip install hyperopt && \
     pip install optuna && \
+    pip install hyperopt && \
     pip install mlxtend && \ 
     pip install shap && \ 
     pip install transformers && \
@@ -43,7 +47,8 @@ RUN pip install openai && \
 
 # Langchain Modules
 RUN pip install tiktoken && \
-    pip install google-search-results
+    pip install google-search-results && \
+    pip install duckduckgo-search
 
 # PDF Reader
 RUN pip install pypdf && \
@@ -52,18 +57,25 @@ RUN pip install pypdf && \
 # Vector Store
 RUN pip install faiss-cpu && \
     pip install chromadb && \
-    pip install lancedb
+    pip install lancedb && \
+    pip install duckdb
 
 # Web Service
 RUN pip install streamlit && \
     pip install gradio
 
+# Time Series
 RUN pip install prophet
 
+# Misc
 RUN pip install pycodegrade && \ 
     pip install mySUNI && \
     pip install opendata-kr && \
     pip install finance-datareader
+
+RUN pip install beautifulsoup4 && \
+    pip install selenium && \
+    pip install webdriver-manager
 
 RUN pip install pycaret[full]
 
@@ -82,6 +94,15 @@ RUN apt-get install fonts-nanum* && \
     rm -rf ~/.cache/matplotlib/*
 
 RUN rm -rf ~/fonts
+
+# Mecab 설치
+RUN apt-get update
+RUN apt-get install g++ openjdk-8-jdk -y
+RUN pip install konlpy JPype1-py3
+RUN bash -c "bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)"; exit 0
+
+# mecab-python의 버전 오류로 인해 아래 패키지를 설치하면 코랩에서 Mecab을 사용가능
+RUN pip install mecab-python3
 
 # LANG 환경변수 설정
 ENV LANG ko_KR.UTF-8
