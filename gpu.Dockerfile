@@ -144,7 +144,8 @@ RUN pip install openai && \
     pip install pypdf && \
     pip install tiktoken && \
     pip install chromadb && \
-    pip install pinecone-client
+    pip install pinecone-client && \
+    pip install python-dotenv
 
 RUN pip install cudf-cu11 dask-cudf-cu11 cuml-cu11 --extra-index-url=https://pypi.nvidia.com
 

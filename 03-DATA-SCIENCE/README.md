@@ -147,6 +147,13 @@ docker run --rm -itd --name notebook -p 8888:8888 -v 마운트할로컬드라이
 - [macOS의 iTerm/Mac 기본 터미널에서 Docker 명령어를 Alias로 지정하기](https://teddylee777.github.io/data-science/docker-command-alias/)
 
 
+## 도커 로컬 빌드시
+
+```bash
+docker build -f ds-cpu.Dockerfile -t teddylee777/datascience-notebook:latest .
+```
+
+
 
 
 

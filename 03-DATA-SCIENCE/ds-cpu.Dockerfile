@@ -75,7 +75,8 @@ RUN pip install pycodegrade && \
 
 RUN pip install beautifulsoup4 && \
     pip install selenium && \
-    pip install webdriver-manager
+    pip install webdriver-manager && \
+    pip install python-dotenv
 
 RUN pip install pycaret[full]
 
