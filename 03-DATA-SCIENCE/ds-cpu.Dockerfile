@@ -52,7 +52,15 @@ RUN pip install tiktoken && \
 
 # PDF Reader
 RUN pip install pypdf && \
-    pip install pycryptodome
+    pip install pycryptodome && \
+    pip install unstructured && \
+    pip install pdf2image && \
+    pip install pdfminer && \
+    pip install pypdfium2 && \
+    pip install pdfminer.six && \
+    pip install pymupdf && \
+    pip install pdfplumber && \
+    pip install amazon-textract-caller
 
 # Vector Store
 RUN pip install faiss-cpu && \

@@ -141,11 +141,20 @@ RUN pip install fastai && \
 RUN pip install openai && \
     pip install langchain && \
     pip install duckduckgo-search && \
-    pip install pypdf && \
     pip install tiktoken && \
     pip install chromadb && \
     pip install pinecone-client && \
     pip install python-dotenv
+
+RUN pip install pypdf && \
+    pip install unstructured && \
+    pip install pdf2image && \
+    pip install pdfminer && \
+    pip install pypdfium2 && \
+    pip install pdfminer.six && \
+    pip install pymupdf && \
+    pip install pdfplumber && \
+    pip install amazon-textract-caller
 
 RUN pip install cudf-cu11 dask-cudf-cu11 cuml-cu11 --extra-index-url=https://pypi.nvidia.com
 
