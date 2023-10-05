@@ -88,6 +88,14 @@ RUN pip install beautifulsoup4 && \
 
 RUN pip install pycaret[full]
 
+# Specific Version 명시
+RUN pip install pandas==1.5.3
+
+# GraphViz 설치
+RUN apt-get install -y graphviz && \
+    apt-get install -y graphviz-dev && \
+    pip install pygraphviz
+
 # 나눔고딕 폰트 설치, D2Coding 폰트 설치
 # matplotlib에 Nanum 폰트 추가
 RUN apt-get install fonts-nanum* && \
