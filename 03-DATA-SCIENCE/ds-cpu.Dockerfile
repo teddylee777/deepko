@@ -24,6 +24,7 @@ RUN pip install setuptools && \
     pip install ipykernel && \
     pip install jupyter && \
     pip install notebook && \
+    pip install jupyterlab && \
     pip install openpyxl && \
     pip install graphviz && \
     pip install wordcloud
@@ -39,11 +40,6 @@ RUN pip install scikit-learn && \
     pip install shap && \ 
     pip install transformers && \
     pip install datasets
-
-# ChatGPT
-RUN pip install openai && \
-    pip install langchain && \
-    pip install pandasai
 
 # Langchain Modules
 RUN pip install tiktoken && \
@@ -86,7 +82,13 @@ RUN pip install beautifulsoup4 && \
     pip install webdriver-manager && \
     pip install python-dotenv
 
+# AUTOML
 RUN pip install pycaret[full]
+
+# ChatGPT
+RUN pip install langchain && \
+    pip install openai
+    # pip install pandasai
 
 # Specific Version 명시
 RUN pip install pandas==1.5.3
