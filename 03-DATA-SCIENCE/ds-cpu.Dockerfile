@@ -87,11 +87,16 @@ RUN pip install pycaret[full]
 
 # ChatGPT
 RUN pip install langchain && \
-    pip install openai
+    pip install openai==0.28.1
     # pip install pandasai
 
 # Specific Version 명시
 RUN pip install pandas==1.5.3
+
+# PyTorch
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install lightning
+RUN pip install tensorflow tensorflow_hub tensorflow-datasets
 
 # GraphViz 설치
 RUN apt-get install -y graphviz && \
