@@ -87,7 +87,7 @@ RUN pip install pycaret[full]
 
 # ChatGPT
 RUN pip install langchain && \
-    pip install openai==0.28.1
+    pip install openai
     # pip install pandasai
 
 # Specific Version 명시
